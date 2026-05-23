@@ -77,8 +77,8 @@ python lambda_function.py
 ## Running on AWS
 
 1. Create your Identity Provider in AWS with the following configuration:
-* Set Provider URL to `https://token.actions.githubusercontent.com`
-* Set Audience to `sts.amazonaws.com`
+* Set Provider URL to `https://token.actions.githubusercontent.com`.
+* Set Audience to `sts.amazonaws.com`.
 
 2. Create an IAM Role using the Identity Provider:
 * Set the Trusted entity type to `Web identity`.
@@ -190,10 +190,10 @@ python lambda_function.py
 }
 ```
 
-3. Fork this repository and configure your GitHub Secrets:
+3. Fork this repository and set up your repository secrets:
 
-* PUBLISHER_DATA: Same as your local .env
-* SUBSCRIBER_DATA: Same as your local .env
-* AWS_ROLE_TO_ASSUME: ARN of the IAM role
+* PUBLISHER_DATA (Same as your local .env)
+* SUBSCRIBER_DATA (Same as your local .env)
+* AWS_ROLE_TO_ASSUME (ARN of the IAM role)
 
 4. Trigger the deploy workflow and you are set!
