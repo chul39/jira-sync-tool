@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Jira Cross-Domain Board Sync Tool
+
+Parameters:
+  PublisherData:
+    Type: String
+    NoEcho: true
+  SubscriberData:
+    Type: String
+    NoEcho: true
+
+Resources:
+  JiraSyncLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.11
+      CodeUri: .
+      Timeout: 30
+      MemorySize: 128
+      Environment:
+        Variables:
+          PUBLISHER_DATA: !Ref PublisherData
+          SUBSCRIBER_DATA: !Ref SubscriberData
+      Events:
+        CronSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
