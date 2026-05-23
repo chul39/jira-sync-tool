@@ -2,9 +2,6 @@ import os
 import requests
 from requests.auth import HTTPBasicAuth
 import json
-from dotenv import load_dotenv
-
-load_dotenv()
 
 headers = {
     "Accept": "application/json", 
@@ -127,5 +124,14 @@ def lambda_handler(event, context):
         print(f"Failed: {str(e)}")
         return {'statusCode': 500, 'body': json.dumps(str(e))}
 
+def load_env():
+    with open('.env', 'r') as env_file:
+        for line in env_file:
+            if '=' in line and not line.strip().startswith('#'):
+                k, v = line.strip().split('=', 1)
+                os.environ[k.strip()] = v.strip()
+
 if __name__ == "__main__":
+    if os.path.exists('.env'):
+        load_env()
     lambda_handler({}, None)
